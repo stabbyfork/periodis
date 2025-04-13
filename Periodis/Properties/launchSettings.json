@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Periodis (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Periodis (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

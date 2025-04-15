@@ -41,19 +41,40 @@ namespace Periodis
 
     public sealed partial class MainWindow : Window
     {
+        readonly static Dictionary<int, (int Row, int Col)> periodicPositions = new()
+        {
+            {1, (0, 0)}, {2, (0, 17)},
+            {3, (1, 0)}, {4, (1, 1)}, {5, (1, 12)}, {6, (1, 13)}, {7, (1, 14)}, {8, (1, 15)}, {9, (1, 16)}, {10, (1, 17)},
+            {11, (2, 0)}, {12, (2, 1)}, {13, (2, 12)}, {14, (2, 13)}, {15, (2, 14)}, {16, (2, 15)}, {17, (2, 16)}, {18, (2, 17)},
+            {19, (3, 0)}, {20, (3, 1)}, {21, (3, 2)}, {22, (3, 3)}, {23, (3, 4)}, {24, (3, 5)}, {25, (3, 6)},
+            {26, (3, 7)}, {27, (3, 8)}, {28, (3, 9)}, {29, (3, 10)}, {30, (3, 11)}, {31, (3, 12)}, {32, (3, 13)},
+            {33, (3, 14)}, {34, (3, 15)}, {35, (3, 16)}, {36, (3, 17)},
+            {37, (4, 0)}, {38, (4, 1)}, {39, (4, 2)}, {40, (4, 3)}, {41, (4, 4)}, {42, (4, 5)}, {43, (4, 6)},
+            {44, (4, 7)}, {45, (4, 8)}, {46, (4, 9)}, {47, (4, 10)}, {48, (4, 11)}, {49, (4, 12)}, {50, (4, 13)},
+            {51, (4, 14)}, {52, (4, 15)}, {53, (4, 16)}, {54, (4, 17)},
+            {55, (5, 0)}, {56, (5, 1)}, {57, (8, 2)}, {58, (8, 3)}, {59, (8, 4)}, {60, (8, 5)}, {61, (8, 6)}, {62, (8, 7)},
+            {63, (8, 8)}, {64, (8, 9)}, {65, (8, 10)}, {66, (8, 11)}, {67, (8, 12)}, {68, (8, 13)}, {69, (8, 14)},
+            {70, (8, 15)}, {71, (8, 16)}, {72, (5, 3)}, {73, (5, 4)}, {74, (5, 5)}, {75, (5, 6)}, {76, (5, 7)},
+            {77, (5, 8)}, {78, (5, 9)}, {79, (5, 10)}, {80, (5, 11)}, {81, (5, 12)}, {82, (5, 13)}, {83, (5, 14)},
+            {84, (5, 15)}, {85, (5, 16)}, {86, (5, 17)},
+            {87, (6, 0)}, {88, (6, 1)}, {89, (9, 2)}, {90, (9, 3)}, {91, (9, 4)}, {92, (9, 5)}, {93, (9, 6)}, {94, (9, 7)},
+            {95, (9, 8)}, {96, (9, 9)}, {97, (9, 10)}, {98, (9, 11)}, {99, (9, 12)}, {100, (9, 13)}, {101, (9, 14)},
+            {102, (9, 15)}, {103, (9, 16)}, {104, (6, 3)}, {105, (6, 4)}, {106, (6, 5)}, {107, (6, 6)}, {108, (6, 7)},
+            {109, (6, 8)}, {110, (6, 9)}, {111, (6, 10)}, {112, (6, 11)}, {113, (6, 12)}, {114, (6, 13)}, {115, (6, 14)},
+            {116, (6, 15)}, {117, (6, 16)}, {118, (6, 17)}
+        };
+
         public MainWindow()
         {
             this.InitializeComponent();
-            string filePath = "elements.json"; // relative to executable
-            string json = File.ReadAllText(filePath);
-            Root root = JsonConvert.DeserializeObject<Root>(json);
-
+            string json = File.ReadAllText("C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json");
+            Root? root = JsonConvert.DeserializeObject<Root>(json) ?? throw new Exception("Error deserializing JSON");
             // Access table
             var columns = root.Table.Columns.Column;         // List<string>
-            var rows = root.Table.Row;                       // List<RowData>
+            var rows = root.Table.Row;                    // List<RowData>
 
             // Convert each row to Dictionary<string, string>
-            List<Dictionary<string, string>> table = new();
+            List<Dictionary<string, string>> table = [];
 
             foreach (var row in rows)
             {
@@ -64,8 +85,24 @@ namespace Periodis
                 }
                 table.Add(dict);
             }
+            foreach (var element in table)
+            {
+                string symbol = element["Symbol"];
+                string name = element["Name"];
+                string atomicNumber = element["AtomicNumber"];
+                System.Diagnostics.Debug.WriteLine($"{atomicNumber}: {symbol} - {name}");
+            }
             CreateGrid();
-            AddElements();
+            foreach (var element in table)
+            {
+                int atomicNumber = int.Parse(element["AtomicNumber"]);
+
+                if (periodicPositions.TryGetValue(atomicNumber, out var pos))
+                {
+                    AddElement(element, pos.Row, pos.Col);
+                }
+            }
+
         }
 
         private void CreateGrid()
@@ -76,23 +113,7 @@ namespace Periodis
                 PeriodicTable.ColumnDefinitions.Add(new ColumnDefinition());
         }
 
-        private void AddElements()
-        {
-            AddElement("H", 0, 0);     // Hydrogen at column 1, row 0
-            AddElement("He", 17, 0);   // Helium
-            AddElement("Li", 0, 1);
-            AddElement("Be", 1, 1);
-            AddElement("B", 12, 1);
-            AddElement("C", 13, 1);
-            AddElement("N", 14, 1);
-            AddElement("O", 15, 1);
-            AddElement("F", 16, 1);
-            AddElement("Ne", 17, 1);
-
-            // ...continue for rest of the table
-        }
-
-        private void AddElement(string symbol, int col, int row)
+        private void AddElement(Dictionary<string, string> element, int row, int col)
         {
             var border = new Border
             {
@@ -102,10 +123,11 @@ namespace Periodis
                 BorderBrush = new SolidColorBrush(Colors.Black),
                 Child = new TextBlock
                 {
-                    Text = symbol,
+                    Text = element["AtomicNumber"] + "\n" + element["Symbol"] + "\n" + Math.Round(double.Parse(element["AtomicMass"]), 2),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    FontSize = 18
+                    Padding = new Thickness(2),
+                    FontSize = 15
                 }
             };
 

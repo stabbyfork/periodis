@@ -32,9 +32,9 @@
               "RelativeDocumentMoniker": "Assets\\elements.json",
               "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json",
               "RelativeToolTip": "Assets\\elements.json",
-              "ViewState": "AgIAAHoCAAAAAAAAAAAlwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-14T11:35:24.706Z",
+              "WhenOpened": "2025-04-15T11:40:37.086Z",
               "EditorCaption": ""
             },
             {
@@ -47,8 +47,7 @@
               "RelativeToolTip": "MainWindow.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-14T09:09:13.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T09:09:13.639Z"
             },
             {
               "$type": "Document",
@@ -58,7 +57,7 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAABsAAAAAaGZmZmb4vzAAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAHIAAAAANDMzM7MRwHgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T18:27:36.663Z",
               "EditorCaption": ""

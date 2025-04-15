@@ -511,3 +511,4 @@ C:\VSCode\Repo\periodis\Periodis\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x6
 C:\VSCode\Repo\periodis\Periodis\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MultipleQualifiersPerDimensionFound.txt
 C:\VSCode\Repo\periodis\Periodis\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\ProjectArchitectures.txt
 C:\VSCode\Repo\periodis\Periodis\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Newtonsoft.Json.dll
+C:\VSCode\Repo\periodis\Periodis\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Assets\elements.json

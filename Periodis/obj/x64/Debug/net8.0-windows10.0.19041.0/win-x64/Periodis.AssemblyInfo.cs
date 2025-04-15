@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Periodis")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3351e3ef6245f514c422be6019aa32d2c9b1327a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6378969d488602a75f23e2788e0718a75790bbf9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Periodis")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Periodis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

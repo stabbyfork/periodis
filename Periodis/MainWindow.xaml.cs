@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Periodis
 {
@@ -64,10 +65,13 @@ namespace Periodis
             {116, (6, 15)}, {117, (6, 16)}, {118, (6, 17)}
         };
 
+        int? selectedElement = null;
+        int? hoveredElement = null;
+
         public MainWindow()
         {
             this.InitializeComponent();
-            string json = File.ReadAllText("C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json");
+            string json = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Assets\\elements.json");
             Root? root = JsonConvert.DeserializeObject<Root>(json) ?? throw new Exception("Error deserializing JSON");
             // Access table
             var columns = root.Table.Columns.Column;         // List<string>
@@ -84,13 +88,6 @@ namespace Periodis
                     dict[columns[i]] = row.Cell[i];
                 }
                 table.Add(dict);
-            }
-            foreach (var element in table)
-            {
-                string symbol = element["Symbol"];
-                string name = element["Name"];
-                string atomicNumber = element["AtomicNumber"];
-                System.Diagnostics.Debug.WriteLine($"{atomicNumber}: {symbol} - {name}");
             }
             CreateGrid();
             foreach (var element in table)
@@ -113,23 +110,100 @@ namespace Periodis
                 PeriodicTable.ColumnDefinitions.Add(new ColumnDefinition());
         }
 
+        /*void ShowElementInfo(Dictionary<string, string> element)
+        {
+
+            ElementName.Text = element["Name"];
+            ElementDetails.Text = element["BoilingPoint"];
+            InfoPanel.Visibility = Visibility.Visible;
+        }*/
+
         private void AddElement(Dictionary<string, string> element, int row, int col)
         {
+            string group = element["GroupBlock"];
+            Windows.UI.Color tileColor = group switch
+            {
+                "Metalloid" => Colors.Turquoise,
+                "Lanthanide" => Colors.SaddleBrown,
+                "Actinide" => Colors.DeepPink,
+                "Transition metal" => Colors.Red,
+                "Post-transition metal" => Colors.Blue,
+                "Alkaline earth metal" => Colors.SandyBrown,
+                "Noble gas" => Colors.MediumPurple,
+                "Alkali metal" => Colors.Brown,
+                "Nonmetal" => Colors.LightGreen,
+                "Halogen" => Colors.DeepSkyBlue,
+                _ => Colors.SlateGray
+            };
+
             var border = new Border
             {
-                Background = new SolidColorBrush(Colors.SkyBlue),
+                Background = new SolidColorBrush(tileColor),
                 Margin = new Thickness(2),
                 BorderThickness = new Thickness(1),
                 BorderBrush = new SolidColorBrush(Colors.Black),
-                Child = new TextBlock
+                Child = new StackPanel
                 {
-                    Text = element["AtomicNumber"] + "\n" + element["Symbol"] + "\n" + Math.Round(double.Parse(element["AtomicMass"]), 2),
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Padding = new Thickness(2),
-                    FontSize = 15
+                    Children =
+                    {
+                        new TextBlock
+                        {
+                            Text = element["AtomicNumber"],
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            Padding = new Thickness(2),
+                            FontSize = 12,
+                            Foreground = new SolidColorBrush(Colors.White)
+                        },
+                        new TextBlock
+                        {
+                            Text = element["Symbol"],
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Padding = new Thickness(2),
+                            FontSize = 18,
+                            Foreground = new SolidColorBrush(Colors.White)
+                        },
+                        new TextBlock
+                        {
+                            Text = (Math.Round(double.Parse(element["AtomicMass"]), 2)).ToString(),
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Bottom,
+                            Padding = new Thickness(2),
+                            FontSize = 12,
+                            Foreground = new SolidColorBrush(Colors.White)
+                        }
+                    }
                 }
             };
+            border.PointerEntered += (s, e) =>
+            {
+                var point = e.GetCurrentPoint(RootCanvas);
+                Point position = point.Position;
+
+                Canvas.SetLeft(InfoPanel, position.X + 10);
+                Canvas.SetTop(InfoPanel, position.Y + 10);
+
+                ElementName.Text = element["Name"];
+                ElementDetails.Text = String.Format("Group: {0}\nAtomic mass: {1}", element["GroupBlock"], element["AtomicMass"]);
+                InfoPanel.Visibility = Visibility.Visible;
+                hoveredElement = int.Parse(element["AtomicNumber"]);
+            };
+
+            border.PointerExited += (s, e) =>
+            {
+                InfoPanel.Visibility = Visibility.Collapsed;
+                hoveredElement = null;
+            };
+
+            border.PointerMoved += (s, e) =>
+            {
+                Point position = e.GetCurrentPoint(RootCanvas).Position;
+
+                Canvas.SetLeft(InfoPanel, position.X + 10);
+                Canvas.SetTop(InfoPanel, position.Y + 10);
+            };
+
 
             Grid.SetColumn(border, col);
             Grid.SetRow(border, row);

@@ -9,7 +9,20 @@
     mc:Ignorable="d"
     Title="Periodis">
 
-    <ScrollViewer>
-        <Grid x:Name="PeriodicTable" Margin="20" />
-    </ScrollViewer>
+    <Canvas x:Name="RootCanvas" HorizontalAlignment="Stretch">
+        <Grid x:Name="PeriodicTable" Margin="20" Padding="0" />
+
+        <Border x:Name="InfoPanel"
+            Background="LightBlue"
+            Padding="10"
+            CornerRadius="5"
+            Visibility="Collapsed"
+            Width="200"
+            Height="80">
+            <StackPanel>
+                <TextBlock x:Name="ElementName" FontSize="18" FontWeight="Bold"/>
+                <TextBlock x:Name="ElementDetails" FontSize="14"/>
+            </StackPanel>
+        </Border>
+    </Canvas>
 </Window>

@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,28 +26,29 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "elements.json",
               "DocumentMoniker": "C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json",
               "RelativeDocumentMoniker": "Assets\\elements.json",
               "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json",
               "RelativeToolTip": "Assets\\elements.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANEAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-15T11:40:37.086Z",
+              "WhenOpened": "2025-04-16T05:55:18.807Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
               "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAgZmZmZiYgwBQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-14T09:09:13.639Z"
+              "WhenOpened": "2025-04-14T09:09:13.639Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -57,7 +58,7 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAHIAAAAANDMzM3MmwIAAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAALcAAAAAKjMzM7MSwLsAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T18:27:36.663Z",
               "EditorCaption": ""

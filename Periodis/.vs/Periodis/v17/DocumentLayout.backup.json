@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\VSCode\\Repo\\periodis\\Periodis\\",
+  "WorkspaceRootPath": "D:\\GitHub\\Repositories\\periodis\\Periodis\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|d:\\github\\repositories\\periodis\\periodis\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|d:\\github\\repositories\\periodis\\periodis\\assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:assets\\elements.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|c:\\vscode\\repo\\periodis\\periodis\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|d:\\github\\repositories\\periodis\\periodis\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0737FAEC-4A7C-41D9-99AE-CDAEC89E145B}|Periodis.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "elements.json",
-              "DocumentMoniker": "C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json",
+              "DocumentMoniker": "D:\\GitHub\\Repositories\\periodis\\Periodis\\Assets\\elements.json",
               "RelativeDocumentMoniker": "Assets\\elements.json",
-              "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\Assets\\elements.json",
+              "ToolTip": "D:\\GitHub\\Repositories\\periodis\\Periodis\\Assets\\elements.json",
               "RelativeToolTip": "Assets\\elements.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAANEAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAECAAAAAAAAAAAMwBQCAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-16T05:55:18.807Z",
+              "WhenOpened": "2025-04-17T18:26:11.645Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml",
+              "DocumentMoniker": "D:\\GitHub\\Repositories\\periodis\\Periodis\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml",
+              "ToolTip": "D:\\GitHub\\Repositories\\periodis\\Periodis\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
-              "ViewState": "AgIAAAUAAAAgZmZmZiYgwBQAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-04-14T09:09:13.639Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\GitHub\\Repositories\\periodis\\Periodis\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\VSCode\\Repo\\periodis\\Periodis\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\GitHub\\Repositories\\periodis\\Periodis\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAK0AAAAA+f///78twLsAAABnAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAkwHEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T18:27:36.663Z",
               "EditorCaption": ""

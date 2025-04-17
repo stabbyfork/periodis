@@ -9,19 +9,40 @@
     mc:Ignorable="d"
     Title="Periodis">
 
-    <Canvas x:ConnectionId='2' x:Name="RootCanvas" HorizontalAlignment="Stretch">
+    <Canvas x:ConnectionId='2' x:Name="RootCanvas">
         <Grid x:ConnectionId='3' x:Name="PeriodicTable" Margin="20" Padding="0" />
 
+        <StackPanel Padding="20" Spacing="10" Canvas.Left="1500" Canvas.Top="20">
+            <TextBlock Text="Enter compound to search:" FontSize="18" />
+
+            <TextBox x:ConnectionId='7' x:Name="SearchBox"
+             PlaceholderText="Enter compound name or formula..."
+                                         />
+
+            <ComboBox x:ConnectionId='8' x:Name="SearchSelector"
+              SelectedIndex="0"
+              PlaceholderText="Choose what to search">
+                <ComboBoxItem Content="Name" />
+                <ComboBoxItem Content="Formula" />
+            </ComboBox>
+
+            <TextBlock x:ConnectionId='9' x:Name="ResultText" FontSize="16" />
+
+            <ScrollViewer Height="300">
+                <StackPanel x:ConnectionId='10' x:Name="ResultsPanel" />
+            </ScrollViewer>
+        </StackPanel>
+
         <Border x:ConnectionId='4' x:Name="InfoPanel"
-            Background="LightBlue"
+            Background="DarkBlue"
             Padding="10"
             CornerRadius="5"
             Visibility="Collapsed"
             Width="200"
-            Height="80">
+            Height="280">
             <StackPanel>
                 <TextBlock x:ConnectionId='5' x:Name="ElementName" FontSize="18" FontWeight="Bold"/>
-                <TextBlock x:ConnectionId='6' x:Name="ElementDetails" FontSize="14"/>
+                <TextBlock x:ConnectionId='6' x:Name="ElementDetails" FontSize="14" TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
     </Canvas>

@@ -15,7 +15,11 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.UI.Xaml.Shapes;
+using Microsoft.UI.Xaml.Documents;
 
 namespace Periodis
 {
@@ -73,11 +77,10 @@ namespace Periodis
             this.InitializeComponent();
             string json = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Assets\\elements.json");
             Root? root = JsonConvert.DeserializeObject<Root>(json) ?? throw new Exception("Error deserializing JSON");
-            // Access table
-            var columns = root.Table.Columns.Column;         // List<string>
-            var rows = root.Table.Row;                    // List<RowData>
 
-            // Convert each row to Dictionary<string, string>
+            var columns = root.Table.Columns.Column;
+            var rows = root.Table.Row;
+
             List<Dictionary<string, string>> table = [];
 
             foreach (var row in rows)
@@ -104,19 +107,146 @@ namespace Periodis
 
         private void CreateGrid()
         {
-            for (int i = 0; i < 10; i++)  // 10 rows
+            for (int i = 0; i < 10; i++)
                 PeriodicTable.RowDefinitions.Add(new RowDefinition());
-            for (int j = 0; j < 18; j++)  // 18 columns
+            for (int j = 0; j < 18; j++)
                 PeriodicTable.ColumnDefinitions.Add(new ColumnDefinition());
         }
 
-        /*void ShowElementInfo(Dictionary<string, string> element)
+        private async Task<Dictionary<int, (string Title, string Description, int CID)>> GetTitlesAndDescriptionsAsync(List<int> cids)
         {
+            var result = new Dictionary<int, (string Title, string Description, int CID)>();
 
-            ElementName.Text = element["Name"];
-            ElementDetails.Text = element["BoilingPoint"];
-            InfoPanel.Visibility = Visibility.Visible;
-        }*/
+            if (cids == null || cids.Count == 0)
+                return result;
+
+            string cidList = string.Join(",", cids);
+            string url = $"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cidList}/description/JSON";
+
+            using var client = new HttpClient();
+
+            try
+            {
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(json);
+
+                var root = doc.RootElement;
+
+                if (root.TryGetProperty("InformationList", out var infoList) &&
+                    infoList.TryGetProperty("Information", out var infos))
+                {
+                    var tempData = new Dictionary<int, (string? Title, string? Description)>();
+
+                    foreach (var item in infos.EnumerateArray())
+                    {
+                        int cid = item.GetProperty("CID").GetInt32();
+
+                        tempData.TryGetValue(cid, out var existing);
+
+                        string? title = existing.Title;
+                        string? description = existing.Description;
+
+                        if (item.TryGetProperty("Title", out var titleEl))
+                            title = titleEl.GetString();
+
+                        if (item.TryGetProperty("Description", out var descEl))
+                            description = descEl.GetString();
+
+                        tempData[cid] = (title, description);
+                    }
+
+                    foreach (var pair in tempData)
+                    {
+                        string finalTitle = pair.Value.Title ?? "(No Title Found)";
+                        string finalDescription = pair.Value.Description ?? "(No Description Found)";
+
+                        result[pair.Key] = (finalTitle, finalDescription, pair.Key);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                foreach (var cid in cids)
+                {
+                    result[cid] = ("Error", $"Error fetching data: {ex.Message}", -1);
+                }
+            }
+
+            return result;
+        }
+
+        private async void SearchBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key != Windows.System.VirtualKey.Enter)
+            {
+                return;
+            }
+            string input = SearchBox.Text;
+
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                try
+                {
+                    ResultText.Text = "Sending request...";
+
+                    using var httpClient = new HttpClient();
+
+                    string? selectedSearchType = SearchSelector.SelectedItem.ToString();
+                    string inputType = selectedSearchType switch
+                    {
+                        "Formula" => "compound/fastformula",
+                        _ => "compound/name"
+                    };
+                    inputType += $"/{input}/cids/TXT?MaxRecords=256";
+                    string apiUrl = $"https://pubchem.ncbi.nlm.nih.gov/rest/pug/{inputType}";
+
+                    HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+                    response.EnsureSuccessStatusCode();
+
+                    string result = await response.Content.ReadAsStringAsync();
+                    ResultsPanel.Children.Clear();
+
+                    var cidLines = result
+                        .Split(["\r\n", "\n", "\r", ",", " "], StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s => int.TryParse(s, out int cid) ? cid : -1)
+                        .Where(cid => cid > 0)
+                        .Distinct()
+                        .Take(256)
+                        .ToList();
+                    System.Diagnostics.Debug.Print(result);
+                    if (cidLines.Count == 0)
+                    {
+                        ResultsPanel.Children.Add(new TextBlock { Text = "No valid CIDs found." });
+                        return;
+                    }
+                    var data = await GetTitlesAndDescriptionsAsync(cidLines);
+
+                    foreach (var pair in data)
+                    {
+                        string title = pair.Value.Title;
+                        string description = pair.Value.Description;
+
+                        ResultsPanel.Children.Add(new TextBlock
+                        {
+                            
+                            Text = $"{title}: {description} (https://pubchem.ncbi.nlm.nih.gov/compound/{pair.Value.CID})",
+                            FontSize = 16,
+                            Margin = new Thickness(0, 4, 0, 4),
+                            TextWrapping = TextWrapping.WrapWholeWords,
+                            MaxWidth = 200,
+                        });
+                    }
+                    ResultText.Text = "Complete";
+                }
+                catch (Exception ex)
+                {
+                    ResultText.Text = $"Error: {ex.Message}";
+                }
+            }
+        }
 
         private void AddElement(Dictionary<string, string> element, int row, int col)
         {
@@ -151,7 +281,7 @@ namespace Periodis
                             Text = element["AtomicNumber"],
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Top,
-                            Padding = new Thickness(2),
+                            Padding = new Thickness(18, 3, 18, 3),
                             FontSize = 12,
                             Foreground = new SolidColorBrush(Colors.White)
                         },
@@ -160,8 +290,8 @@ namespace Periodis
                             Text = element["Symbol"],
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
-                            Padding = new Thickness(2),
-                            FontSize = 18,
+                            Padding = new Thickness(18, 3, 18, 3),
+                            FontSize = 20,
                             Foreground = new SolidColorBrush(Colors.White)
                         },
                         new TextBlock
@@ -169,7 +299,7 @@ namespace Periodis
                             Text = (Math.Round(double.Parse(element["AtomicMass"]), 2)).ToString(),
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Bottom,
-                            Padding = new Thickness(2),
+                            Padding = new Thickness(18, 3, 18, 3),
                             FontSize = 12,
                             Foreground = new SolidColorBrush(Colors.White)
                         }
@@ -185,7 +315,7 @@ namespace Periodis
                 Canvas.SetTop(InfoPanel, position.Y + 10);
 
                 ElementName.Text = element["Name"];
-                ElementDetails.Text = String.Format("Group: {0}\nAtomic mass: {1}", element["GroupBlock"], element["AtomicMass"]);
+                ElementDetails.Text = $"Group: {element["GroupBlock"]}\nAtomic mass: {element["AtomicMass"]}\nStandard state: {element["StandardState"]}\nMelting point: {element["MeltingPoint"]}\nBoiling point: {element["BoilingPoint"]}\nElectron configuration: {element["ElectronConfiguration"]}\nElectronegativity: {element["Electronegativity"]}\nAtomic radius: {element["AtomicRadius"]}\nIonization energy: {element["IonizationEnergy"]}\nElectron affinity: {element["ElectronAffinity"]}\nOxidation states: {element["OxidationStates"]}\nDensity: {element["Density"]}\nYear discovered: {element["YearDiscovered"]}";
                 InfoPanel.Visibility = Visibility.Visible;
                 hoveredElement = int.Parse(element["AtomicNumber"]);
             };
@@ -209,6 +339,5 @@ namespace Periodis
             Grid.SetRow(border, row);
             PeriodicTable.Children.Add(border);
         }
-
     }
 }

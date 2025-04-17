@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VSCode\\Repo\\periodis\\Periodis\\Periodis.csproj": {}
+    "D:\\GitHub\\Repositories\\periodis\\Periodis\\Periodis.csproj": {}
   },
   "projects": {
-    "C:\\VSCode\\Repo\\periodis\\Periodis\\Periodis.csproj": {
+    "D:\\GitHub\\Repositories\\periodis\\Periodis\\Periodis.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VSCode\\Repo\\periodis\\Periodis\\Periodis.csproj",
+        "projectUniqueName": "D:\\GitHub\\Repositories\\periodis\\Periodis\\Periodis.csproj",
         "projectName": "Periodis",
-        "projectPath": "C:\\VSCode\\Repo\\periodis\\Periodis\\Periodis.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\VSCode\\Repo\\periodis\\Periodis\\obj\\",
+        "projectPath": "D:\\GitHub\\Repositories\\periodis\\Periodis\\Periodis.csproj",
+        "packagesPath": "C:\\Users\\Markus\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\Repositories\\periodis\\Periodis\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Markus\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

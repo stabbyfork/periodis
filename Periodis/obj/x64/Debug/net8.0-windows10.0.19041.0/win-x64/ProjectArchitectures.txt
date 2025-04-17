@@ -1,1 +1,1 @@
-C:\VSCode\Repo\periodis\Periodis\Periodis.csproj;x64
+D:\GitHub\Repositories\periodis\Periodis\Periodis.csproj;x64
